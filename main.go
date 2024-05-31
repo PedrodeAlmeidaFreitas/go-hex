@@ -1,23 +1,11 @@
+/*
+Copyright © 2024 NAME HERE <EMAIL ADDRESS>
+
+*/
 package main
 
-import (
-	"database/sql"
-	"fmt"
-
-	_ "github.com/mattn/go-sqlite3"
-
-	dbadapter "github.com/PedrodeAlmeidaFreitas/go-hex/adapters/db"
-	"github.com/PedrodeAlmeidaFreitas/go-hex/application"
-)
+import "github.com/PedrodeAlmeidaFreitas/go-hex/cmd"
 
 func main() {
-	db, _ := sql.Open("sqlite3", "sqlite.db")
-	productDb := dbadapter.NewProductDb(db)
-	productService := application.NewProductService(productDb)
-
-	product, err := productService.Create("Product Name", 30)
-	if err != nil {
-		fmt.Print("Error while adding new product ", err.Error())
-	}
-	productService.Enable(product)
+	cmd.Execute()
 }

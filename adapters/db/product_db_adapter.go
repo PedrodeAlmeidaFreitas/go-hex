@@ -2,6 +2,7 @@ package db
 
 import (
 	"database/sql"
+	"fmt"
 
 	"github.com/PedrodeAlmeidaFreitas/go-hex/application"
 )
@@ -36,6 +37,7 @@ func (p *ProductDb) Save(product application.ProductInterface) (application.Prod
 	var err error
 	p.db.QueryRow("SELECT id FROM products WHERE id = ?", product.GetID()).Scan(&rows)
 
+	fmt.Println("Trying to save product...")
 	if rows == 0 {
 		_, err = p.create(product)
 	} else {
